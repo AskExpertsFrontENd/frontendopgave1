@@ -1,0 +1,258 @@
+/* @layer reset, global, components, overrides; -> Rykket til Layout.astro */
+
+@import url("./reset.css") layer(reset);
+@import url("./global.css") layer(global);
+@import url("./tokens.css") layer(tokens);
+@import url("./overrides.css") layer(overrides);
+@import url("https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,400..700;1,400..700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap");
+
+.banner {
+  display: flex;
+  padding: 100px 360px;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+  background: var(--color-neutrals-50);
+}
+.banner p {
+  text-align: center;
+}
+.under-text {
+  font-size: 22px;
+}
+.grey-text1 {
+  color: var(--color-neutrals-400);
+  text-align: center;
+  font-family: Lato;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 147.5%; /* 23.6px */
+  letter-spacing: 2.32px;
+  text-transform: uppercase;
+}
+.hero-title {
+  position: relative;
+  display: inline-block;
+  margin: 0;
+}
+
+.hero-title span {
+  display: inline-block;
+  font-family: Cabin, sans-serif;
+  font-size: 60px;
+  font-weight: 700;
+  line-height: 1.1;
+  color: #000814;
+
+  text-decoration: underline;
+  text-decoration-color: #ffd700;
+  text-decoration-thickness: 7px;
+  text-underline-offset: 2px; /* tættere på teksten */
+  text-decoration-skip-ink: none; /* vigtig */
+}
+
+.hero-title::before {
+  content: "";
+  position: absolute;
+  right: 100%;
+  width: 100vw;
+  height: 7px;
+  background: #ffd700;
+
+  /* skal justeres manuelt så den flugter */
+  bottom: 2.5px;
+}
+
+/* =========================
+   CASE STUDY
+========================= */
+
+.case-study {
+  container-type: inline-size;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem 4rem;
+  color: var(--color-text);
+}
+
+/* =========================
+   HEADER / HERO
+========================= */
+
+.case-study__header {
+  margin-bottom: 4rem;
+}
+
+.case-study__hero-image img,
+.case-study__hero-image picture {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 1.5rem;
+  object-fit: cover;
+}
+
+/* =========================
+   CASE DETAILS CARD
+========================= */
+
+.case-details {
+  background: var(--color-surface-elevated);
+  color: var(--color-on-surface-elevated);
+  border-radius: 1.25rem;
+  padding: 1.25rem 1.5rem;
+  margin: -2rem auto 0;
+  width: min(90%, 850px);
+
+  display: grid;
+  gap: 1rem;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+}
+
+.case-details__list {
+  margin: 0;
+  display: grid;
+  gap: 1rem;
+}
+
+.case-details__item {
+  display: grid;
+  gap: 0.25rem;
+}
+
+.case-details__label {
+  margin: 0;
+  font-size: 0.75rem;
+  color: var(--color-on-ui-primary-muted);
+  font-weight: 400;
+}
+
+.case-details__value {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--color-on-surface-elevated);
+  font-weight: 500;
+}
+
+.case-details__button {
+  display: inline-block;
+  width: fit-content;
+  text-decoration: none;
+  background: var(--color-action);
+  color: var(--color-ui-primary);
+  padding: 0.9rem 1.5rem;
+  border-radius: 999px;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.case-details__button:hover {
+  background: var(--color-surface-highlight);
+}
+
+/* =========================
+   CONTENT SECTIONS
+========================= */
+
+.case-study__section {
+  max-width: 700px;
+  margin: 0 auto 3rem;
+}
+
+.case-study__title {
+  margin: 0 0 1rem;
+  color: var(--color-text);
+  line-height: 1.2;
+  font-weight: 700;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+}
+
+.case-study__title--main {
+  font-size: clamp(2rem, 4vw, 3rem);
+}
+
+.case-study__text {
+  margin: 0 0 1rem;
+  color: var(--color-text-muted);
+  line-height: 1.7;
+  font-size: 1rem;
+}
+
+.case-study__list {
+  margin: 1rem 0;
+  padding-left: 1.25rem;
+  color: var(--color-text-muted);
+}
+
+.case-study__list-item {
+  margin-bottom: 0.5rem;
+  line-height: 1.6;
+}
+
+/* =========================
+   SECTION IMAGE
+========================= */
+
+.case-study__section-image {
+  margin-top: 1.5rem;
+}
+
+.case-study__section-image img,
+.case-study__section-image picture {
+  display: block;
+  width: 100%;
+  max-width: 450px;
+  height: auto;
+  margin: 0 auto;
+  border-radius: 0.5rem;
+  object-fit: cover;
+}
+
+/* =========================
+   CONTAINER QUERY
+========================= */
+
+@container (min-width: 700px) {
+  .case-details {
+    grid-template-columns: 1fr auto;
+  }
+
+  .case-details__list {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+
+  .case-details__button {
+    justify-self: end;
+  }
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 699px) {
+  .case-study {
+    padding: 1.5rem 1rem 3rem;
+  }
+
+  .case-details {
+    margin-top: -1rem;
+    padding: 1rem;
+    width: min(92%, 850px);
+  }
+
+  .case-study__section {
+    max-width: 100%;
+    margin-bottom: 2.5rem;
+  }
+
+  .case-study__hero-image img,
+  .case-study__hero-image picture {
+    border-radius: 1rem;
+  }
+}
