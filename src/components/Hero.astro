@@ -1,31 +1,238 @@
 ---
-import { Image } from "astro:assets";
-import Services from "./Services.astro";
+import Services from "@components/Services.astro";
+import ArrowRight from "@icons/arrow--right.svg";
 import CEOImage from "@assets/images/ceo.webp";
 ---
 
-<section class="hero">
-  <div class="hero-content">
-    <h1>Empowering Your Business Growth</h1>
-    <p>
-      Discover tailored strategies and expert insights to take your business to
-      the next level. Let us help you navigate challenges and achieve
-      sustainable success.
-    </p>
-    <a href="#0">Book a Meeting</a>
-    <a href="#0">Learn More</a>
-  </div>
-  <Image src={CEOImage} alt="CEO" />
+<section class="hero" style={`--hero-image: url(${CEOImage.src});`}>
+  <div class="hero__inner">
+    <div class="hero__content">
+      <h1 class="hero__title">
+        <span class="hero__line hero__line--top">Empowering Your</span>
+        <span class="hero__line">Business Growth</span>
+      </h1>
 
-  <Services />
+      <p class="hero__text">
+        Discover tailored strategies and expert insights to take your business
+        to the next level. Let us help you navigate challenges and achieve
+        sustainable success.
+      </p>
+
+      <div class="hero__buttons">
+        <a class="hero__button hero__button--primary" href="#0">
+          Book a Meeting
+        </a>
+
+        <a class="hero__button hero__button--secondary" href="#0">
+          Learn More
+          <ArrowRight aria-hidden="true" />
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero__services">
+    <Services />
+  </div>
 </section>
 
 <style>
-  /* Styles her */
   @layer components {
     .hero {
-      background-color: #f3f4f6;
-      padding: 2rem;
+      position: relative;
+      min-height: 39.41413rem;
+      background-color: var(--color-ui-primary);
+      overflow: visible;
+      isolation: isolate;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset-block: 0;
+      right: 0;
+      width: 50%;
+      background-image: var(--hero-image);
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: cover;
+      z-index: 0;
+    }
+
+    .hero__inner {
+      position: relative;
+      z-index: 1;
+      width: min(1200px, calc(100% - 48px));
+      margin-inline: auto;
+      display: flex;
+      align-items: flex-start;
+      padding-top: 5rem;
+    }
+
+    .hero__content {
+      width: 31.74975rem;
+      max-width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1.8125rem;
+    }
+
+    .hero__title {
+      margin: 0;
+      font-family: Cabin, sans-serif;
+      font-size: 3.125rem;
+      font-weight: 700;
+      line-height: 1.16;
+      color: var(--color-on-ui-primary);
+    }
+
+    .hero__line {
+      display: block;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero__line--top::before {
+      content: "";
+      position: absolute;
+      left: -50vw;
+      right: 8.6rem;
+      height: 0.45rem;
+      background: linear-gradient(
+        90deg,
+        rgb(255 204 74 / 0) 0%,
+        rgb(255 204 74 / 0) 55%,
+        rgb(255 204 74 / 0.25) 70%,
+        rgb(255 204 74 / 0.6) 82%,
+        var(--color-action) 92%,
+        var(--color-action) 100%
+      );
+      z-index: -1;
+      bottom: 0.05rem;
+    }
+
+    .hero__text {
+      margin: 0;
+      width: 31.29475rem;
+      max-width: 100%;
+      color: var(--color-on-ui-primary-muted);
+      font-family: Lato, sans-serif;
+      font-size: 1.125rem;
+      font-weight: 400;
+      line-height: 147.5%;
+    }
+
+    .hero__buttons {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .hero__button {
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      font-family: Lato, sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+      line-height: 1;
+    }
+
+    .hero__button--primary {
+      padding: 1rem 1.9375rem;
+      border-radius: 2.625rem;
+      background: var(--color-action);
+      color: var(--color-ui-primary);
+    }
+
+    .hero__button--secondary {
+      padding: 1rem 1.9375rem;
+      border-radius: 2.625rem;
+      border: 1px solid rgb(255 255 255 / 0.5);
+      background: transparent;
+      color: var(--color-on-ui-primary);
+    }
+
+    .hero__button--secondary svg {
+      width: 1rem;
+      height: 1rem;
+      flex-shrink: 0;
+    }
+
+    .hero__services {
+      width: min(1200px, calc(100% - 48px));
+      position: absolute;
+      left: 50%;
+      bottom: 0;
+      transform: translate(-50%, 50%);
+      z-index: 2;
+    }
+  }
+  @media (max-width: 48rem) {
+    .hero {
+      min-height: auto;
+      padding-bottom: 2rem;
+    }
+
+    .hero::after {
+      inset: 0;
+      width: 100%;
+      opacity: 0.18;
+      background-position: center right;
+      background-size: cover;
+    }
+
+    .hero__inner {
+      width: min(100%, calc(100% - 32px));
+      padding-top: 2.5rem;
+      padding-bottom: 0;
+    }
+
+    .hero__content {
+      width: 100%;
+      max-width: 100%;
+      gap: 1.5rem;
+    }
+
+    .hero__title {
+      font-size: 2rem;
+      line-height: 1.1;
+      max-width: 12ch;
+    }
+
+    .hero__line--top::before {
+      left: -19rem;
+      right: 5rem;
+      height: 0.32rem;
+      bottom: 0.02rem;
+    }
+
+    .hero__text {
+      width: 100%;
+      max-width: 36ch;
+      font-size: 1rem;
+    }
+
+    .hero__buttons {
+      width: 100%;
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .hero__button {
+      width: 100%;
+      justify-content: center;
+    }
+
+    .hero__services {
+      position: static;
+      width: min(100%, calc(100% - 32px));
+      transform: none;
+      margin: 2rem auto 0;
     }
   }
 </style>

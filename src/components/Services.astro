@@ -1,18 +1,40 @@
 ---
 import ServiceCard from "@components/ServiceCard.astro";
 import servicesData from "@data/services.json";
-import DynamicImage from "@helpers/DynamicImage.astro";
 ---
 
-<div class="services">
-  {servicesData.services.map((service) => <ServiceCard service={service} />)}
-</div>
+<section class="services" aria-labelledby="services-heading">
+  <h2 id="services-heading" class="sr-only">Our services</h2>
+
+  <div class="services__grid">
+    {servicesData.services.map((service) => <ServiceCard service={service} />)}
+  </div>
+</section>
 
 <style>
   @layer components {
-    .services {
+    .services__grid {
       display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 1rem;
+    }
+
+    .sr-only {
+      position: absolute;
+      inline-size: 1px;
+      block-size: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0 0 0 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    @media (max-width: 62rem) {
+      .services__grid {
+        grid-template-columns: 1fr;
+      }
     }
   }
 </style>

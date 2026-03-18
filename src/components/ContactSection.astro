@@ -1,0 +1,209 @@
+---
+import Phone from "@icons/phone.svg";
+import Clock from "@icons/clock.svg";
+import Pin from "@icons/pin.svg";
+---
+
+<section class="contact">
+  <div class="contact__inner">
+    <div class="contact__content">
+      <p class="contact__eyebrow">Process</p>
+
+      <h2 class="contact__title">Contact Us. It’s Easy.</h2>
+
+      <p class="contact__text">
+        Leverage agile frameworks to provide a robust synopsis for high level
+        overviews. Iterative approaches to corporate strategy foster
+        collaborative.
+      </p>
+
+      <div class="contact__list">
+        <div class="contact__item contact__item--yellow">
+          <span class="contact__icon">
+            <Phone />
+          </span>
+          <div>
+            <p class="contact__label">Call Today</p>
+            <p class="contact__value">+1 800 100 900</p>
+          </div>
+        </div>
+
+        <div class="contact__item contact__item--green">
+          <span class="contact__icon">
+            <Clock />
+          </span>
+          <div>
+            <p class="contact__label">Monday To Friday</p>
+            <p class="contact__value">9AM – 5PM</p>
+          </div>
+        </div>
+
+        <div class="contact__item contact__item--grey">
+          <span class="contact__icon">
+            <Pin />
+          </span>
+          <div>
+            <p class="contact__label">USA Office</p>
+            <p class="contact__value">
+              195 Devonshire St Boston, MA <br />02110<br />
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="contact__images">
+      <div class="contact__image-main"></div>
+
+      <div class="contact__image-side">
+        <div class="img img--top"></div>
+        <div class="img img--bottom"></div>
+      </div>
+
+      <span class="contact__accent"></span>
+    </div>
+  </div>
+</section>
+
+<style>
+  @layer components {
+    .contact {
+      background: #fff;
+      padding-block: 9rem;
+    }
+
+    .contact__inner {
+      width: min(1200px, calc(100% - 48px));
+      margin-inline: auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .contact__eyebrow {
+      margin: 0;
+      font-family: Lato, sans-serif;
+      font-size: 1rem;
+      letter-spacing: 0.145rem;
+      text-transform: uppercase;
+    }
+
+    .contact__title {
+      margin: 0.75rem 0;
+      font-family: Cabin, sans-serif;
+      font-size: 3rem;
+      font-weight: 700;
+    }
+
+    .contact__text {
+      margin-bottom: 2rem;
+      max-width: 28rem;
+      font-family: Lato, sans-serif;
+      font-size: 1.125rem;
+      line-height: 1.5;
+      color: #6b7280;
+    }
+
+    .contact__list {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .contact__item {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    .contact__icon {
+      width: 3rem;
+      height: 3rem;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+    }
+
+    .contact__item--yellow .contact__icon {
+      background: rgb(255 204 74 / 0.25);
+      color: #f6c843;
+    }
+
+    .contact__item--green .contact__icon {
+      background: rgb(134 239 172 / 0.25);
+      color: #22c55e;
+    }
+
+    .contact__item--grey .contact__icon {
+      background: rgb(0 0 0 / 0.08);
+      color: #111;
+    }
+
+    .contact__icon svg {
+      width: 1.2rem;
+      height: 1.2rem;
+    }
+
+    .contact__label {
+      margin: 0;
+      font-size: 0.9rem;
+      color: #6b7280;
+    }
+
+    .contact__value {
+      margin: 0.25rem 0 0;
+      font-weight: 600;
+    }
+
+    .contact__images {
+      position: relative;
+      display: grid;
+      grid-template-columns: auto auto;
+      gap: 1.5rem;
+      z-index: 1;
+    }
+
+    .contact__image-main {
+      width: 18rem;
+      height: 26rem;
+      background: #d1d5db;
+      border-radius: 1.25rem;
+      z-index: 2;
+    }
+
+    .contact__image-side {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .img {
+      width: 14rem;
+      height: 12rem;
+      background: #e5e7eb;
+      border-radius: 1.25rem;
+    }
+
+    .contact__accent {
+      position: absolute;
+      bottom: -1.8rem;
+      left: -3rem;
+      width: 16rem;
+      height: 10rem;
+      background: #86efac;
+      border-radius: 1.5rem;
+      z-index: 0;
+    }
+
+    @media (max-width: 64rem) {
+      .contact__inner {
+        grid-template-columns: 1fr;
+      }
+
+      .contact__images {
+        justify-content: center;
+      }
+    }
+  }
+</style>

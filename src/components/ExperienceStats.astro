@@ -1,0 +1,265 @@
+---
+import data from "@data/experience.json";
+---
+
+<section class="experience">
+  <div class="experience__inner">
+    <div class="experience__intro">
+      <p class="experience__eyebrow">{data.eyebrow}</p>
+      <h2 class="experience__title">{data.title}</h2>
+      <p class="experience__text">{data.subtitle}</p>
+    </div>
+
+    <div class="experience__stats">
+      {
+        data.stats.map((item) => {
+          const radius = 76;
+          const circumference = 2 * Math.PI * radius;
+          const offset = circumference - (item.value / 100) * circumference;
+
+          return (
+            <article
+              class={`experience__stat experience__stat--${item.label.toLowerCase()}`}
+            >
+              <div class="experience__ring">
+                <svg
+                  class="experience__svg"
+                  viewBox="0 0 200 200"
+                  aria-hidden="true"
+                >
+                  <circle
+                    class="experience__track"
+                    cx="100"
+                    cy="100"
+                    r={radius}
+                  />
+                  <circle
+                    class="experience__progress"
+                    cx="100"
+                    cy="100"
+                    r={radius}
+                    style={`stroke-dasharray:${circumference}; stroke-dashoffset:${offset};`}
+                  />
+                </svg>
+
+                <span class="experience__dot" aria-hidden="true" />
+                <p class="experience__value">{item.value}%</p>
+              </div>
+
+              <h3 class="experience__label">{item.label}</h3>
+            </article>
+          );
+        })
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  @layer components {
+    .experience {
+      background: var(--color-surface-highlight);
+      padding-block: 6rem;
+    }
+
+    .experience__inner {
+      width: min(1200px, calc(100% - 48px));
+      margin-inline: auto;
+      display: grid;
+      grid-template-columns: minmax(16rem, 26rem) 1fr;
+      align-items: start;
+      gap: 4rem;
+    }
+
+    .experience__intro {
+      max-width: 25rem;
+      padding-top: 1rem;
+    }
+
+    .experience__eyebrow {
+      margin: 0;
+      color: var(--color-text);
+      font-family: Lato, sans-serif;
+      font-size: 1rem;
+      font-weight: 400;
+      line-height: 147.5%;
+      letter-spacing: 0.145rem;
+      text-transform: uppercase;
+    }
+
+    .experience__title {
+      margin: 1rem 0 0;
+      color: var(--color-text);
+      font-family: Cabin, sans-serif;
+      font-size: 2.5rem;
+      font-weight: 700;
+      line-height: 116%;
+    }
+
+    .experience__text {
+      margin: 1.25rem 0 0;
+      color: var(--color-text);
+      font-family: Lato, sans-serif;
+      font-size: 1.125rem;
+      font-weight: 400;
+      line-height: 147.5%;
+    }
+
+    .experience__stats {
+      display: flex;
+      justify-content: space-between;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .experience__stat {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      min-width: 11rem;
+    }
+
+    .experience__ring {
+      position: relative;
+      width: 12.5rem;
+      height: 12.5rem;
+      display: grid;
+      place-items: center;
+    }
+
+    .experience__svg {
+      width: 100%;
+      height: 100%;
+      transform: rotate(-90deg);
+      overflow: visible;
+    }
+
+    .experience__track,
+    .experience__progress {
+      fill: none;
+      stroke-width: 4;
+      stroke-linecap: round;
+    }
+
+    .experience__track {
+      stroke: rgb(255 255 255 / 0.35);
+    }
+
+    .experience__progress {
+      stroke: white;
+    }
+
+    .experience__dot {
+      position: absolute;
+      width: 1.15rem;
+      height: 1.15rem;
+      border-radius: 50%;
+      background: var(--color-ui-primary);
+      box-shadow: 0 0 0 4px white;
+    }
+
+    .experience__stat--consistency .experience__dot {
+      top: 2.2rem;
+      left: 2.4rem;
+    }
+
+    .experience__stat--improvement .experience__dot {
+      top: 1.4rem;
+      left: 3.6rem;
+    }
+
+    .experience__stat--branching .experience__dot {
+      top: 2rem;
+      left: 2.8rem;
+    }
+
+    .experience__value {
+      position: absolute;
+      margin: 0;
+      color: var(--color-text);
+      font-family: Cabin, sans-serif;
+      font-size: 3rem;
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    .experience__label {
+      margin: 0;
+      color: var(--color-text);
+      font-family: Cabin, sans-serif;
+      font-size: 1.25rem;
+      font-weight: 600;
+      line-height: 116%;
+      text-align: center;
+    }
+
+    @media (max-width: 64rem) {
+      .experience__inner {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+      }
+
+      .experience__intro {
+        max-width: 36rem;
+        padding-top: 0;
+      }
+
+      .experience__stats {
+        justify-content: flex-start;
+      }
+    }
+
+    @media (max-width: 48rem) {
+      .experience {
+        padding-block: 4rem;
+      }
+
+      .experience__inner {
+        width: min(100%, calc(100% - 32px));
+      }
+
+      .experience__title {
+        font-size: 2.4rem;
+      }
+
+      .experience__text {
+        font-size: 1rem;
+      }
+
+      .experience__stats {
+        justify-content: center;
+        gap: 2.5rem 1.5rem;
+      }
+
+      .experience__ring {
+        width: 10rem;
+        height: 10rem;
+      }
+
+      .experience__value {
+        font-size: 2.25rem;
+      }
+
+      .experience__dot {
+        width: 1rem;
+        height: 1rem;
+      }
+
+      .experience__stat--consistency .experience__dot {
+        top: 1rem;
+        left: 1rem;
+      }
+
+      .experience__stat--improvement .experience__dot {
+        top: 0.25rem;
+        left: 3.35rem;
+      }
+
+      .experience__stat--branching .experience__dot {
+        top: 0.75rem;
+        left: 1.85rem;
+      }
+    }
+  }
+</style>

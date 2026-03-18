@@ -3,30 +3,81 @@ const { service } = Astro.props;
 import ArrowRight from "@icons/arrow--right.svg";
 ---
 
-<article>
-  <h2>{service.title}</h2>
-  <p>{service.description}</p>
-  <a href="#0">{service.buttonText} <ArrowRight stroke-width={2.5} /></a>
-  <!-- <a> burde måske være en variant af en component -->
+<article class="service-card">
+  <div class="service-card__content">
+    <h2 class="service-card__title">{service.title}</h2>
+    <p class="service-card__text">{service.description}</p>
+  </div>
+
+  <a class="service-card__link" href="#0">
+    {service.buttonText}
+    <ArrowRight aria-hidden="true" />
+  </a>
 </article>
 
 <style>
   @layer components {
-    article {
-      background: var(--color-blue-700-transparent);
-      color: var(--color-on-surface-elevated);
-      padding: 2rem; /* Dette burde være en token */
-      border-radius: 20px; /* Dette burde være en token */
+    .service-card {
+      display: flex;
+      min-height: 16.5rem;
+      padding: 2rem;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 0.625rem;
+      flex: 1 0 0;
+      border-radius: 1.25rem;
+      border: 1px solid rgb(255 255 255 / 0.2);
+      background: var(--color-surface-elevated-transparent);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
     }
-    a {
-      display: inline flex;
-      gap: 1ch;
-      color: var(--color-action);
-      font-weight: bold;
 
-      svg {
-        inline-size: 16px;
-      }
+    .service-card__content {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .service-card__title {
+      margin: 0;
+      color: var(--color-on-surface-elevated);
+      font-family: Cabin, sans-serif;
+      font-size: 1.5625rem;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 130%;
+    }
+
+    .service-card__text {
+      margin: 0;
+      color: var(--color-on-ui-primary);
+      font-family: Lato, sans-serif;
+      font-size: 1rem;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 160%;
+    }
+
+    .service-card__link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+
+      color: var(--color-action);
+      font-family: Lato, sans-serif;
+      font-size: 1rem;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 160%;
+      text-decoration: underline;
+      text-underline-offset: 0.15em;
+    }
+
+    .service-card__link svg {
+      width: 1rem;
+      height: 1rem;
+      flex-shrink: 0;
     }
   }
 </style>

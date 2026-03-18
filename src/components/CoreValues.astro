@@ -1,0 +1,292 @@
+---
+import data from "@data/coreValues.json";
+
+import Layers from "@icons/layers.svg";
+import Bars from "@icons/bars.svg";
+import Globe from "@icons/globe.svg";
+import Gear from "@icons/gear.svg";
+import ArrowRight from "@icons/arrow--right.svg";
+
+const { theme = "dark" } = Astro.props;
+
+const iconMap = {
+  layers: Layers,
+  bars: Bars,
+  globe: Globe,
+  gear: Gear,
+};
+---
+
+<section class={`core-values core-values--${theme}`}>
+  <div class="core-values__inner">
+    <div class="core-values__top">
+      <div class="core-values__intro">
+        <p class="core-values__eyebrow">{data.eyebrow}</p>
+        <h2 class="core-values__title">{data.title}</h2>
+        <p class="core-values__text">{data.subtitle}</p>
+      </div>
+
+      <a class="core-values__button" href={data.button.link}>
+        {data.button.text}
+      </a>
+    </div>
+
+    <div class="core-values__grid">
+      {
+        data.values.map((item) => {
+          const Icon = iconMap[item.icon as keyof typeof iconMap];
+
+          return (
+            <article class="core-values__card">
+              <span class="core-values__icon" aria-hidden="true">
+                <Icon />
+              </span>
+
+              <h3 class="core-values__card-title">{item.title}</h3>
+              <p class="core-values__card-text">{item.description}</p>
+
+              <a class="core-values__link" href={item.link.url}>
+                {item.link.text}
+                <ArrowRight aria-hidden="true" />
+              </a>
+            </article>
+          );
+        })
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  @layer components {
+    .core-values {
+      padding-block: 6.25rem;
+    }
+
+    .core-values--dark {
+      background: var(--color-ui-primary);
+    }
+
+    .core-values--light {
+      background: var(--color-surface-secondary);
+    }
+
+    .core-values__inner {
+      width: min(1200px, calc(100% - 48px));
+      margin-inline: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 3rem;
+    }
+
+    .core-values__top {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: end;
+      gap: 2rem;
+    }
+
+    .core-values__intro {
+      max-width: 39rem;
+    }
+
+    .core-values__eyebrow {
+      margin: 0;
+      font-family: Lato, sans-serif;
+      font-size: 1rem;
+      font-weight: 400;
+      line-height: 147.5%;
+      letter-spacing: 0.145rem;
+      text-transform: uppercase;
+    }
+
+    .core-values__title {
+      margin: 0.75rem 0 0;
+      font-family: Cabin, sans-serif;
+      font-size: 3.125rem;
+      font-weight: 700;
+      line-height: 116%;
+    }
+
+    .core-values__text {
+      margin: 1rem 0 0;
+      max-width: 42rem;
+      font-family: Lato, sans-serif;
+      font-size: 1.125rem;
+      font-weight: 400;
+      line-height: 147.5%;
+    }
+
+    .core-values__button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem 2rem;
+      border-radius: 999px;
+      text-decoration: none;
+      font-family: Lato, sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+      line-height: 1;
+      flex-shrink: 0;
+    }
+
+    .core-values--dark .core-values__eyebrow,
+    .core-values--dark .core-values__title,
+    .core-values--dark .core-values__text {
+      color: var(--color-on-ui-primary);
+    }
+
+    .core-values--dark .core-values__button {
+      background: var(--color-surface-primary);
+      color: var(--color-ui-primary);
+    }
+
+    .core-values--light .core-values__eyebrow,
+    .core-values--light .core-values__title,
+    .core-values--light .core-values__text {
+      color: var(--color-text);
+    }
+
+    .core-values--light .core-values__button {
+      background: var(--color-ui-primary);
+      color: var(--color-on-ui-primary);
+    }
+
+    .core-values__grid {
+      display: flex;
+      width: 100%;
+      align-items: flex-start;
+      gap: 2.25rem;
+      flex-wrap: nowrap;
+    }
+
+    .core-values__card {
+      width: 17rem;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.9375rem;
+      padding: 2.25rem 1.4375rem;
+      border-radius: 1.25rem;
+      border: 1px solid #eaeaea;
+      background: var(--color-surface-secondary);
+      box-sizing: border-box;
+      flex: 0 0 17rem;
+    }
+
+    .core-values__card:nth-child(1),
+    .core-values__card:nth-child(3) {
+      min-height: 22.875rem;
+    }
+
+    .core-values__card:nth-child(2),
+    .core-values__card:nth-child(4) {
+      min-height: 18.5rem;
+    }
+
+    .core-values__icon {
+      width: 3rem;
+      height: 3rem;
+      display: inline-flex;
+      color: var(--color-ui-primary);
+      margin-bottom: 0.5rem;
+      background: var(--color-ui-primary);
+      color: white;
+      border-radius: 50%;
+      padding: 0.5rem;
+    }
+
+    .core-values__icon svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .core-values__card-title {
+      margin: 0;
+      color: var(--color-text);
+      font-family: Cabin, sans-serif;
+      font-size: 1.25rem;
+      font-weight: 600;
+      line-height: 116%;
+    }
+
+    .core-values__card-text {
+      margin: 0;
+      color: var(--color-text-muted);
+      font-family: Lato, sans-serif;
+      font-size: 1rem;
+      font-weight: 400;
+      line-height: 160%;
+      flex-grow: 1;
+    }
+
+    .core-values__link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      color: var(--color-text);
+      font-family: Lato, sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+      line-height: 1;
+      text-decoration: none;
+      margin-top: auto;
+    }
+
+    .core-values__link svg {
+      width: 1rem;
+      height: 1rem;
+      flex-shrink: 0;
+    }
+
+    @media (max-width: 64rem) {
+      .core-values__top {
+        grid-template-columns: 1fr;
+        align-items: flex-start;
+      }
+
+      .core-values__grid {
+        gap: 1.5rem;
+      }
+    }
+
+    @media (max-width: 48rem) {
+      .core-values {
+        padding-block: 4rem;
+      }
+
+      .core-values__inner {
+        width: min(100%, calc(100% - 32px));
+        gap: 2rem;
+      }
+
+      .core-values__title {
+        font-size: 2.3rem;
+      }
+
+      .core-values__text {
+        font-size: 1rem;
+      }
+
+      .core-values__button {
+        padding-inline: 1.5rem;
+      }
+
+      .core-values__grid {
+        flex-direction: column;
+      }
+
+      .core-values__card {
+        width: 100%;
+      }
+
+      .core-values__card:nth-child(1),
+      .core-values__card:nth-child(2),
+      .core-values__card:nth-child(3),
+      .core-values__card:nth-child(4) {
+        min-height: auto;
+      }
+    }
+  }
+</style>

@@ -1,0 +1,194 @@
+---
+import { Image } from "astro:assets";
+import StoryboardImage from "@data/images/storyboard.webp";
+import Checkmark from "@icons/checkmark.svg";
+---
+
+<section class="expect">
+  <div class="expect__inner">
+    <div class="expect__media">
+      <div class="expect__shape" aria-hidden="true"></div>
+
+      <Image
+        src={StoryboardImage}
+        alt="Team working together"
+        class="expect__image"
+      />
+    </div>
+
+    <div class="expect__content">
+      <p class="expect__eyebrow">WE'LL WORK WITH YOU</p>
+
+      <h2 class="expect__title">What To Expect</h2>
+
+      <p class="expect__text">
+        Our collaboration is built on transparency, efficiency, and measurable
+        results. Together, we create strategies tailored to your unique needs
+        and goals.
+      </p>
+
+      <ul class="expect__list">
+        <li class="expect__item">
+          <span class="expect__icon">
+            <Checkmark />
+          </span>
+
+          <span>
+            Collaborate to build actionable strategies that drive sustainable
+            growth and deliver tangible outcomes.
+          </span>
+        </li>
+
+        <li class="expect__item">
+          <span class="expect__icon">
+            <Checkmark />
+          </span>
+
+          <span>
+            Identify opportunities to optimize processes and implement impactful
+            solutions with measurable results.
+          </span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<style>
+  @layer components {
+    .expect {
+      background: var(--color-surface-primary);
+      padding-top: 18rem;
+      padding-bottom: 10rem;
+    }
+
+    .expect__inner {
+      width: min(1200px, calc(100% - 48px));
+      margin-inline: auto;
+      display: grid;
+      grid-template-columns: minmax(0, 1.08fr) minmax(18rem, 30rem);
+      align-items: center;
+      gap: 3.5rem;
+    }
+
+    .expect__media {
+      position: relative;
+    }
+
+    .expect__shape {
+      position: absolute;
+      top: -2.4rem;
+      left: -2rem;
+      width: 10.3125rem;
+      height: 9.25rem;
+      border-radius: 1.25rem;
+      background: var(--color-ui-secondary);
+      z-index: 0;
+    }
+
+    .expect__image {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 38rem;
+      min-height: 23rem;
+      border-radius: 1.875rem;
+      display: block;
+      object-fit: cover;
+    }
+
+    .expect__content {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+      max-width: 30rem;
+    }
+
+    .expect__eyebrow {
+      margin: 0;
+      font-family: Lato, sans-serif;
+      font-size: 1rem;
+      letter-spacing: 0.145rem;
+      text-transform: uppercase;
+      color: var(--color-text);
+    }
+
+    .expect__title {
+      margin: 0;
+      font-family: Cabin, sans-serif;
+      font-size: 2.8125rem;
+      font-weight: 700;
+      line-height: 116%;
+      color: var(--color-text);
+    }
+
+    .expect__text {
+      margin: 0;
+      font-family: Lato, sans-serif;
+      font-size: 1.125rem;
+      line-height: 147.5%;
+      color: var(--color-text-weak);
+    }
+
+    .expect__list {
+      list-style: none;
+      padding: 0;
+      margin-top: 0.75rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .expect__item {
+      display: grid;
+      grid-template-columns: 1.5rem 1fr;
+      gap: 1rem;
+      align-items: start;
+      font-family: Lato, sans-serif;
+      font-size: 1.125rem;
+      line-height: 147.5%;
+      color: var(--color-text-muted);
+    }
+
+    .expect__icon {
+      width: 1.5rem;
+      height: 1.5rem;
+      display: inline-flex;
+      color: var(--color-ui-secondary-alternative);
+    }
+
+    .expect__icon svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    @media (max-width: 48rem) {
+      .expect {
+        padding-top: 5rem;
+        padding-bottom: 4rem;
+      }
+
+      .expect__inner {
+        width: min(100%, calc(100% - 32px));
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .expect__shape {
+        width: 7rem;
+        height: 7rem;
+        top: -1rem;
+        left: -0.75rem;
+      }
+
+      .expect__title {
+        font-size: 2.2rem;
+      }
+
+      .expect__text,
+      .expect__item {
+        font-size: 1rem;
+      }
+    }
+  }
+</style>

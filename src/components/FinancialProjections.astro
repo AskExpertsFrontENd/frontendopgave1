@@ -1,0 +1,297 @@
+---
+import data from "@data/financialProjections.json";
+
+import Cal from "@icons/cal.svg";
+import Card from "@icons/card.svg";
+import Law from "@icons/law.svg";
+import Money from "@icons/money.svg";
+import ArrowLeft from "@icons/arrow-left.svg";
+import ArrowRight from "@icons/arrow--right.svg";
+
+const iconMap = {
+  cal: Cal,
+  card: Card,
+  law: Law,
+  money: Money,
+};
+---
+
+<section class="finance">
+  <div class="finance__inner">
+    <div class="finance__header">
+      <div class="finance__intro">
+        <p class="finance__eyebrow">{data.eyebrow}</p>
+        <h2 class="finance__title">{data.title}</h2>
+        <p class="finance__text">{data.subtitle}</p>
+      </div>
+
+      <div class="finance__controls">
+        <button
+          class="finance__btn finance__btn--prev"
+          type="button"
+          aria-label="Scroll left"
+        >
+          <ArrowLeft />
+        </button>
+        <button
+          class="finance__btn finance__btn--next"
+          type="button"
+          aria-label="Scroll right"
+        >
+          <ArrowRight />
+        </button>
+      </div>
+    </div>
+
+    <div class="finance__grid" data-finance-track>
+      {
+        data.values.map((item, i) => {
+          const Icon = iconMap[item.icon as keyof typeof iconMap];
+
+          return (
+            <article
+              class={`finance__card ${i === 1 ? "finance__card--big" : ""}`}
+            >
+              <span class="finance__icon" aria-hidden="true">
+                <Icon />
+              </span>
+
+              <h3 class="finance__card-title">{item.title}</h3>
+              <p class="finance__card-text">{item.description}</p>
+            </article>
+          );
+        })
+      }
+    </div>
+  </div>
+</section>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const section = document.querySelector(".finance");
+    if (!section) return;
+
+    const track = section.querySelector("[data-finance-track]");
+    const prevBtn = section.querySelector(".finance__btn--prev");
+    const nextBtn = section.querySelector(".finance__btn--next");
+
+    if (!track || !prevBtn || !nextBtn) return;
+
+    const getScrollAmount = () => {
+      const firstCard = track.querySelector(".finance__card");
+      if (!firstCard) return 360;
+
+      const cardWidth = firstCard.getBoundingClientRect().width;
+      const gap = 28;
+      return cardWidth + gap;
+    };
+
+    prevBtn.addEventListener("click", () => {
+      track.scrollBy({
+        left: -getScrollAmount(),
+        behavior: "smooth",
+      });
+    });
+
+    nextBtn.addEventListener("click", () => {
+      track.scrollBy({
+        left: getScrollAmount(),
+        behavior: "smooth",
+      });
+    });
+  });
+</script>
+
+<style>
+  @layer components {
+    .finance {
+      background: var(--color-surface-secondary);
+      padding-block: 6rem;
+      overflow: hidden;
+    }
+
+    .finance__inner {
+      width: min(1200px, calc(100% - 48px));
+      margin-inline: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 3.5rem;
+    }
+
+    .finance__header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 2rem;
+    }
+
+    .finance__intro {
+      max-width: 36rem;
+    }
+
+    .finance__eyebrow {
+      margin: 0;
+      color: var(--color-text);
+      font-family: Lato, sans-serif;
+      font-size: 1rem;
+      font-weight: 400;
+      line-height: 147.5%;
+      letter-spacing: 0.145rem;
+      text-transform: uppercase;
+    }
+
+    .finance__title {
+      margin: 0.75rem 0 0;
+      color: var(--color-text);
+      font-family: Cabin, sans-serif;
+      font-size: 2.8125rem;
+      font-weight: 700;
+      line-height: 116%;
+    }
+
+    .finance__text {
+      margin: 1rem 0 0;
+      max-width: 34rem;
+      color: var(--color-text-weak);
+      font-family: Lato, sans-serif;
+      font-size: 1.125rem;
+      font-weight: 400;
+      line-height: 147.5%;
+    }
+
+    .finance__controls {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 0.35rem;
+      flex-shrink: 0;
+    }
+
+    .finance__btn {
+      width: 3.5rem;
+      height: 3.5rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 0;
+      border-radius: 50%;
+      background: var(--color-ui-primary);
+      color: var(--color-on-ui-primary);
+      cursor: pointer;
+    }
+
+    .finance__btn svg {
+      width: 1.25rem;
+      height: 1.25rem;
+    }
+
+    .finance__grid {
+      display: flex;
+      gap: 1.75rem;
+      align-items: stretch;
+      overflow-x: auto;
+      scroll-behavior: smooth;
+      scrollbar-width: none;
+      padding-bottom: 0.5rem;
+    }
+
+    .finance__grid::-webkit-scrollbar {
+      display: none;
+    }
+
+    .finance__card {
+      flex: 0 0 21.5625rem;
+      min-height: 16.5625rem;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.625rem;
+      padding: 2.75rem 2.1875rem;
+      border-radius: 1.25rem;
+      background: var(--color-surface-tertiary);
+      box-sizing: border-box;
+    }
+
+    .finance__card--big {
+      flex-basis: 23.5625rem;
+      padding: 2.8125rem 2.4375rem;
+    }
+
+    .finance__icon {
+      width: 2rem;
+      height: 2rem;
+      display: inline-flex;
+      color: var(--color-text);
+      margin-bottom: 0.75rem;
+    }
+
+    .finance__icon svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .finance__card-title {
+      margin: 0;
+      color: var(--color-text);
+      font-family: Cabin, sans-serif;
+      font-size: 1.25rem;
+      font-weight: 600;
+      line-height: 116%;
+    }
+
+    .finance__card-text {
+      margin: 0;
+      color: var(--color-text-weak);
+      font-family: Lato, sans-serif;
+      font-size: 1rem;
+      font-weight: 400;
+      line-height: 160%;
+    }
+
+    @media (max-width: 48rem) {
+      .finance {
+        padding-block: 4rem;
+      }
+
+      .finance__inner {
+        width: min(100%, calc(100% - 32px));
+        gap: 2rem;
+      }
+
+      .finance__header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .finance__controls {
+        align-self: flex-end;
+        margin-bottom: 0;
+      }
+
+      .finance__card {
+        flex-basis: 18rem;
+        min-height: 15rem;
+        padding: 2rem 1.5rem;
+      }
+
+      .finance__card--big {
+        flex-basis: 19.5rem;
+        padding: 2rem 1.75rem;
+      }
+
+      .finance__title {
+        font-size: 2.2rem;
+      }
+
+      .finance__text,
+      .finance__card-text {
+        font-size: 1rem;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .finance__grid {
+        scroll-behavior: auto;
+      }
+    }
+  }
+</style>
