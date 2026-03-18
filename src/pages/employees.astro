@@ -1,0 +1,50 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Card from "../components/Card.astro";
+import employees from "../data/employees.json";
+---
+
+<Layout title="Employees">
+  <main class="employees-page">
+    <section class="employees-section">
+      <div class="container">
+        <h1>Our Team</h1>
+
+        <div class="employees-grid">
+          {employees.map((employee) => <Card employee={employee} />)}
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout>
+
+<style>
+  .employees-page {
+    background: #f3f3f3;
+    min-height: 100vh;
+  }
+
+  .employees-section {
+    padding: 4rem 1.5rem;
+  }
+
+  .container {
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+
+  h1 {
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #111827;
+    margin: 0 0 3rem;
+  }
+
+  .employees-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 320px));
+    justify-content: center;
+    gap: 2.5rem;
+  }
+</style>
