@@ -1,0 +1,221 @@
+---
+import faqData from "@data/faq.json";
+---
+
+<section class="about-faq">
+  <div class="about-faq__inner">
+    <div class="about-faq__panel">
+      <p class="about-faq__eyebrow">FAQ</p>
+      <h2 class="about-faq__title">Customer Questions</h2>
+
+      <div class="about-faq__list">
+        {
+          faqData.faq.map((item) => (
+            <details class="about-faq__item">
+              <summary class="about-faq__summary">
+                <span class="about-faq__question">{item.question}</span>
+                <span class="about-faq__marker" aria-hidden="true" />
+              </summary>
+
+              <div class="about-faq__content">
+                {item.answer.split("\n\n").map((paragraph) => (
+                  <p>{paragraph}</p>
+                ))}
+              </div>
+            </details>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  @layer components {
+    .about-faq {
+      background: var(--color-surface-primary);
+      padding-block: 6.25rem;
+      padding-bottom: 18rem;
+    }
+
+    .about-faq__inner {
+      width: min(1200px, calc(100% - 48px));
+      margin-inline: auto;
+      display: flex;
+      justify-content: center;
+    }
+
+    .about-faq__panel {
+      width: min(100%, 57.75rem);
+      display: inline-flex;
+      padding: 9.4375rem 14.75rem;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.625rem;
+      border-radius: 1.875rem;
+      background: var(--color-surface-secondary);
+      box-sizing: border-box;
+    }
+
+    .about-faq__eyebrow {
+      width: 100%;
+      margin: 0;
+      text-align: center;
+      color: var(--color-text);
+      font-family: Lato, sans-serif;
+      font-size: 1rem;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 147.5%;
+      letter-spacing: 0.145rem;
+      text-transform: uppercase;
+    }
+
+    .about-faq__title {
+      width: 100%;
+      margin: 0 0 2rem;
+      text-align: center;
+      color: var(--color-text);
+      font-family: Cabin, sans-serif;
+      font-size: 3rem;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 116%;
+    }
+
+    .about-faq__list {
+      width: 100%;
+    }
+
+    .about-faq__item {
+      border-bottom: 1px solid rgb(3 7 18 / 0.12);
+    }
+
+    .about-faq__summary {
+      list-style: none;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 1rem;
+      padding-block: 1.25rem;
+      cursor: pointer;
+    }
+
+    .about-faq__summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .about-faq__question {
+      color: var(--color-text);
+      font-family: Cabin, sans-serif;
+      font-size: 1.25rem;
+      font-style: normal;
+      font-weight: 600;
+      line-height: 116%;
+    }
+
+    .about-faq__marker {
+      position: relative;
+      width: 1.25rem;
+      height: 1.25rem;
+      flex-shrink: 0;
+    }
+
+    .about-faq__marker::before,
+    .about-faq__marker::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 1.125rem;
+      height: 0.125rem;
+      background: var(--color-text);
+      transform: translate(-50%, -50%);
+      transition:
+        transform 180ms ease,
+        opacity 180ms ease;
+    }
+
+    .about-faq__marker::after {
+      transform: translate(-50%, -50%) rotate(90deg);
+    }
+
+    .about-faq__item[open] .about-faq__marker::after {
+      opacity: 0;
+    }
+
+    .about-faq__content {
+      display: grid;
+      grid-template-rows: 0fr;
+      transition: grid-template-rows 220ms ease;
+    }
+
+    .about-faq__content > p {
+      overflow: hidden;
+      margin: 0;
+      padding: 0 2rem 1rem 0;
+      color: var(--color-text-muted);
+      font-family: Lato, sans-serif;
+      font-size: 1rem;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 160%;
+    }
+
+    .about-faq__item[open] .about-faq__content {
+      grid-template-rows: 1fr;
+    }
+
+    @supports not (grid-template-rows: 1fr) {
+      .about-faq__content {
+        display: block;
+      }
+
+      .about-faq__item:not([open]) .about-faq__content {
+        display: none;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .about-faq__marker::before,
+      .about-faq__marker::after,
+      .about-faq__content {
+        transition: none;
+      }
+    }
+
+    @media (max-width: 64rem) {
+      .about-faq__panel {
+        padding: 5rem 3rem;
+      }
+    }
+
+    @media (max-width: 48rem) {
+      .about-faq {
+        padding-block: 4rem;
+      }
+
+      .about-faq__inner {
+        width: min(100%, calc(100% - 32px));
+      }
+
+      .about-faq__panel {
+        width: 100%;
+        padding: 3rem 1.5rem;
+        border-radius: 1.5rem;
+      }
+
+      .about-faq__title {
+        font-size: 2.4rem;
+      }
+
+      .about-faq__question {
+        font-size: 1.1rem;
+      }
+
+      .about-faq__content > p {
+        padding-right: 0;
+      }
+    }
+  }
+</style>

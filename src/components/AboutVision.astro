@@ -1,0 +1,322 @@
+---
+import { Image } from "astro:assets";
+import Friends from "@data/images/friends.webp";
+import Checkmark from "@icons/checkmark.svg";
+---
+
+<section class="about-vision">
+  <div class="about-vision__inner">
+    <div class="about-vision__top">
+      <div class="about-vision__content flow">
+        <p class="about-vision__eyebrow">OUR VISION</p>
+
+        <h2 class="about-vision__title">Turn your ideas into reality.</h2>
+
+        <p class="about-vision__text">
+          Capitalize on low hanging fruit to identify a ballpark value added
+          activity beta test. Override the digital divide with additional from
+          DevOps.
+        </p>
+
+        <ul class="about-vision__list">
+          <li class="about-vision__item">
+            <span class="about-vision__icon" aria-hidden="true">
+              <Checkmark />
+            </span>
+            <span>
+              Bring to the table win-win survival strategies to ensure proactive
+              domination. At the end of the day.
+            </span>
+          </li>
+
+          <li class="about-vision__item">
+            <span class="about-vision__icon" aria-hidden="true">
+              <Checkmark />
+            </span>
+            <span>
+              Capitalize on low hanging fruit to identify a ballpark value added
+              activity to beta test override the digital.
+            </span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="about-vision__media">
+        <span class="about-vision__accent" aria-hidden="true"></span>
+
+        <div class="about-vision__image-wrap">
+          <Image
+            src={Friends}
+            alt="Team working together at a table"
+            class="about-vision__image"
+          />
+        </div>
+      </div>
+    </div>
+
+    <div class="about-vision__stats">
+      <article class="about-vision__stat">
+        <p class="about-vision__number">1128+</p>
+        <p class="about-vision__label">Successful Work</p>
+      </article>
+
+      <article class="about-vision__stat">
+        <p class="about-vision__number">908+</p>
+        <p class="about-vision__label">Team member</p>
+      </article>
+
+      <article class="about-vision__stat">
+        <p class="about-vision__number">258+</p>
+        <p class="about-vision__label">Happy Customers</p>
+      </article>
+
+      <article class="about-vision__stat">
+        <p class="about-vision__number">564+</p>
+        <p class="about-vision__label">Creative Idea</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<style>
+  @layer components {
+    .about-vision {
+      background: var(--color-surface-primary);
+      padding-block: 6.25rem;
+    }
+
+    .about-vision__inner {
+      width: min(1200px, calc(100% - 48px));
+      margin-inline: auto;
+      display: grid;
+      gap: 4.5rem;
+      container-type: inline-size;
+    }
+
+    .about-vision__top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: flex-start;
+      gap: 7.625rem;
+    }
+
+    .flow {
+      --flow-space: 1rem;
+    }
+
+    .flow > * + * {
+      margin-block-start: var(--flow-space);
+    }
+
+    .about-vision__content {
+      --flow-space: 1rem;
+      width: 2rem;
+      flex: 0 0 42rem;
+      padding-top: 0.25rem;
+    }
+
+    .about-vision__eyebrow {
+      margin: 0;
+      color: var(--color-text);
+      font-family: Lato, sans-serif;
+      font-size: 1rem;
+      font-weight: 400;
+      line-height: 147.5%;
+      letter-spacing: 0.145rem;
+      text-transform: uppercase;
+    }
+
+    .about-vision__title {
+      margin: 0;
+      color: var(--color-text);
+      font-family: Cabin, sans-serif;
+      font-size: 3.125rem;
+      font-weight: 700;
+      line-height: 116%;
+      max-width: 84rem;
+    }
+
+    .about-vision__text {
+      margin: 0;
+      max-width: 87rem;
+      color: var(--color-text-muted);
+      font-family: Lato, sans-serif;
+      font-size: 1.125rem;
+      font-weight: 400;
+      line-height: 147.5%;
+    }
+
+    @supports (text-wrap: balance) {
+      .about-vision__title,
+      .about-vision__text {
+        text-wrap: balance;
+      }
+    }
+
+    .about-vision__list {
+      list-style: none;
+      padding: 0;
+      margin: 0.75rem 0 0;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .about-vision__item {
+      display: grid;
+      grid-template-columns: 1.25rem 1fr;
+      gap: 0.875rem;
+      align-items: start;
+      max-width: 28rem;
+      color: var(--color-text-muted);
+      font-family: Lato, sans-serif;
+      font-size: 1rem;
+      font-weight: 400;
+      line-height: 147.5%;
+    }
+
+    .about-vision__icon {
+      width: 1.25rem;
+      height: 1.25rem;
+      display: inline-flex;
+      color: var(--color-ui-secondary-alternative);
+      margin-top: 0.1rem;
+    }
+
+    .about-vision__icon svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .about-vision__media {
+      position: relative;
+      width: 22rem;
+      flex: 0 0 22rem;
+      margin-top: 0.1rem;
+    }
+
+    .about-vision__accent {
+      position: absolute;
+      top: -0.65rem;
+      right: -4rem;
+      width: 5.5rem;
+      height: 5rem;
+      background: var(--color-ui-secondary);
+      border-radius: 1rem;
+      z-index: 0;
+    }
+
+    .about-vision__image-wrap {
+      position: relative;
+      z-index: 1;
+      width: 25rem;
+      height: 17rem;
+      border-radius: 1.25rem;
+      overflow: hidden;
+    }
+
+    .about-vision__image {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    :global(.about-vision__image img) {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      object-position: center 42%;
+    }
+
+    .about-vision__stats {
+      display: grid;
+      grid-template-columns: repeat(4, max-content);
+      justify-content: center;
+      gap: 5.5rem;
+      align-items: start;
+      text-align: center;
+    }
+
+    .about-vision__number {
+      margin: 0;
+      color: var(--color-text);
+      font-family: Cabin, sans-serif;
+      font-size: 3rem;
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    .about-vision__label {
+      margin: 0.75rem 0 0;
+      color: var(--color-text-muted);
+      font-family: Lato, sans-serif;
+      font-size: 1rem;
+      font-weight: 400;
+      line-height: 147.5%;
+    }
+
+    @container (max-width: 58rem) {
+      .about-vision__top {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .about-vision__content {
+        width: 100%;
+        max-width: 100%;
+      }
+
+      .about-vision__media {
+        width: 100%;
+        max-width: 22rem;
+      }
+
+      .about-vision__stats {
+        grid-template-columns: repeat(2, max-content);
+        gap: 2.5rem 3rem;
+      }
+    }
+
+    @container (max-width: 34rem) {
+      .about-vision__image-wrap {
+        width: 100%;
+        max-width: 22rem;
+        height: 13rem;
+      }
+
+      .about-vision__stats {
+        grid-template-columns: 1fr;
+        justify-items: center;
+        gap: 2rem;
+      }
+    }
+
+    @media (max-width: 48rem) {
+      .about-vision {
+        padding-block: 4rem;
+      }
+
+      .about-vision__inner {
+        width: min(100%, calc(100% - 32px));
+        gap: 3rem;
+      }
+
+      .about-vision__title {
+        font-size: 2.4rem;
+      }
+
+      .about-vision__text,
+      .about-vision__item,
+      .about-vision__label {
+        font-size: 1rem;
+      }
+
+      .about-vision__number {
+        font-size: 2.25rem;
+      }
+    }
+  }
+</style>

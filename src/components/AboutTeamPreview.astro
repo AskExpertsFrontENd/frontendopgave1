@@ -1,0 +1,298 @@
+---
+import { Image } from "astro:assets";
+import employees from "@data/employees.json";
+import SarahImage from "@data/images/sarah.webp";
+import JohnImage from "@data/images/john.webp";
+
+const [sarah, john] = employees;
+---
+
+<section class="about-team-preview">
+  <div class="about-team-preview__inner">
+    <div class="about-team-preview__layout">
+      <div class="about-team-preview__intro">
+        <p class="about-team-preview__eyebrow">OUR TEAM</p>
+
+        <h2 class="about-team-preview__title">
+          We champion<br />
+           the bold
+        </h2>
+
+        <p class="about-team-preview__text">
+          Our success stems from the synergy between dedicated teams and our
+          valued clients. We prioritize a company culture that fosters
+          exceptional productivity, ensures customer satisfaction.
+        </p>
+
+        <a class="about-team-preview__button" href="/team"> Meet the Team</a>
+      </div>
+
+      <article class="about-team-preview__person">
+        <div class="about-team-preview__image-wrap">
+          <Image
+            src={SarahImage}
+            alt={sarah.name}
+            class="about-team-preview__image"
+          />
+        </div>
+
+        <div class="about-team-preview__person-content">
+          <h3 class="about-team-preview__name">{sarah.name}</h3>
+          <p class="about-team-preview__role">{sarah.title}</p>
+          <p class="about-team-preview__desc">{sarah.description}</p>
+        </div>
+      </article>
+
+      <article class="about-team-preview__person">
+        <div class="about-team-preview__image-wrap">
+          <Image
+            src={JohnImage}
+            alt={john.name}
+            class="about-team-preview__image"
+          />
+        </div>
+
+        <div class="about-team-preview__person-content">
+          <h3 class="about-team-preview__name">{john.name}</h3>
+          <p class="about-team-preview__role">{john.title}</p>
+          <p class="about-team-preview__desc">{john.description}</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<style>
+  @layer components {
+    .about-team-preview {
+      --space-xs: 0.5rem;
+      --space-s: 0.75rem;
+      --space-m: 1rem;
+      --space-l: 1.375rem;
+      --space-xl: 2rem;
+      --space-2xl: 2.5rem;
+      --space-3xl: 4rem;
+      --step-0: 1rem;
+      --step-1: 1.125rem;
+      --step-2: 1.25rem;
+      --step-3: 1.5rem;
+      --step-5: 3.125rem;
+      --radius-m: 1.25rem;
+      --radius-pill: 999px;
+      background: var(--color-surface-primary);
+      padding-block: 6.25rem;
+    }
+
+    .about-team-preview__inner {
+      width: min(1200px, calc(100% - 48px));
+      margin-inline: auto;
+    }
+
+    .about-team-preview__layout {
+      display: grid;
+      grid-template-columns: 28.125rem 10.625rem minmax(16rem, 1fr);
+      column-gap: var(--space-3xl);
+      row-gap: var(--space-xl);
+      align-items: start;
+    }
+
+    .about-team-preview__intro {
+      grid-row: 1 / span 2;
+      grid-column: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: var(--space-l);
+      align-self: stretch;
+    }
+
+    .about-team-preview__eyebrow {
+      margin: 0;
+      color: var(--color-text);
+      font-family: Lato, sans-serif;
+      font-size: var(--step-0);
+      font-weight: 400;
+      line-height: 147.5%;
+      letter-spacing: 0.145rem;
+      text-transform: uppercase;
+    }
+
+    .about-team-preview__title {
+      margin: 0;
+      color: var(--color-text);
+      font-family: Cabin, sans-serif;
+      font-size: var(--step-5);
+      font-weight: 700;
+      line-height: 116%;
+    }
+
+    .about-team-preview__text {
+      margin: 0;
+      max-width: 95rem;
+      color: var(--color-text-muted);
+      font-family: Lato, sans-serif;
+      font-size: var(--step-1);
+      font-weight: 400;
+      line-height: 147.5%;
+    }
+
+    .about-team-preview__button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 3rem;
+      padding: var(--space-m) var(--space-xl);
+      border-radius: var(--radius-pill);
+      background: var(--color-ui-primary);
+      color: var(--color-on-ui-primary);
+      text-decoration: none;
+      font-family: Lato, sans-serif;
+      font-size: var(--step-1);
+      font-weight: 600;
+      line-height: 1;
+      transition:
+        background-color 180ms ease,
+        transform 180ms ease;
+    }
+
+    .about-team-preview__button:hover,
+    .about-team-preview__button:focus-visible {
+      background: #111827;
+    }
+
+    @supports (color: oklch(from red l c h)) {
+      .about-team-preview__button:hover,
+      .about-team-preview__button:focus-visible {
+        background: oklch(from var(--color-ui-primary) calc(l - 0.08) c h);
+      }
+
+      .about-team-preview__button:active {
+        background: oklch(from var(--color-ui-primary) calc(l - 0.14) c h);
+      }
+    }
+
+    .about-team-preview__person {
+      grid-column: 2 / 4;
+      display: grid;
+      grid-template-columns: subgrid;
+      align-items: center;
+      column-gap: var(--space-xl);
+    }
+
+    .about-team-preview__image-wrap {
+      grid-column: 1;
+      width: 10.625rem;
+      height: 11.5rem;
+      border-radius: var(--radius-m);
+      overflow: hidden;
+    }
+
+    .about-team-preview__image {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    :global(.about-team-preview__image img) {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      object-position: center 28%;
+    }
+
+    .about-team-preview__person-content {
+      grid-column: 2;
+      max-width: 24rem;
+    }
+
+    .about-team-preview__name {
+      margin: 0;
+      color: var(--color-text);
+      font-family: Cabin, sans-serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      line-height: 116%;
+    }
+
+    .about-team-preview__role {
+      margin: var(--space-s) 0 0;
+      color: var(--color-text);
+      font-family: Lato, sans-serif;
+      font-size: var(--step-0);
+      font-weight: 500;
+      line-height: 147.5%;
+    }
+
+    .about-team-preview__desc {
+      margin: var(--space-m) 0 0;
+      color: var(--color-text-muted);
+      font-family: Lato, sans-serif;
+      font-size: var(--step-1);
+      font-weight: 400;
+      line-height: 147.5%;
+    }
+
+    @media (max-width: 64rem) {
+      .about-team-preview__layout {
+        grid-template-columns: 1fr;
+        row-gap: var(--space-2xl);
+      }
+
+      .about-team-preview__intro {
+        grid-row: auto;
+        grid-column: 1;
+      }
+
+      .about-team-preview__person {
+        grid-column: 1;
+        grid-template-columns: 10.625rem 1fr;
+      }
+    }
+
+    @media (max-width: 48rem) {
+      .about-team-preview {
+        padding-block: var(--space-3xl);
+      }
+
+      .about-team-preview__inner {
+        width: min(100%, calc(100% - 32px));
+      }
+
+      .about-team-preview__title {
+        font-size: 2.4rem;
+      }
+
+      .about-team-preview__text,
+      .about-team-preview__desc,
+      .about-team-preview__role {
+        font-size: var(--step-0);
+      }
+
+      .about-team-preview__person {
+        grid-template-columns: 1fr;
+        row-gap: var(--space-m);
+      }
+
+      .about-team-preview__image-wrap,
+      .about-team-preview__person-content {
+        grid-column: auto;
+      }
+
+      .about-team-preview__image-wrap {
+        width: 100%;
+        max-width: 10.625rem;
+      }
+
+      .about-team-preview__name {
+        font-size: 1.75rem;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .about-team-preview__button {
+        transition: none;
+      }
+    }
+  }
+</style>
