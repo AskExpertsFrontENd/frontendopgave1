@@ -15,11 +15,25 @@
   gap: 40px;
   background: var(--color-neutrals-50);
 }
+
 .banner p {
   text-align: center;
 }
+
 .under-text {
   font-size: 22px;
+}
+
+@media (max-width: 700px) {
+  .banner {
+    padding: 60px 20px;
+    gap: 24px;
+  }
+
+  .under-text {
+    font-size: 18px;
+    margin: 0;
+  }
 }
 .grey-text1 {
   color: var(--color-neutrals-400);
