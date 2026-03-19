@@ -112,42 +112,23 @@ import employees from "../data/employees.json";
     transform: translateY(-2px);
     opacity: 0.95;
   }
-
-  /* =========================================================
-     FALLBACK (default): almindelig grid - virker overalt
-     ========================================================= */
   .employees-grid {
     display: grid;
     grid-template-columns: repeat(3, minmax(280px, 1fr));
     gap: 3rem 2rem;
     justify-content: center;
-
-    /* Gør parent klar til subgrid enhancement senere */
     grid-auto-rows: auto;
   }
 
-  /* =========================================================
-     ENHANCEMENT: subgrid hvis browseren understøtter det
-     (forbereder parent rows som Card.astro kan arve)
-     ========================================================= */
+ 
   @supports (grid-template-rows: subgrid) {
     .employees-grid {
-      /*
-        Definér fælles rækkestruktur til cards.
-        Tanken er, at Card.astro kan bruge:
-        - grid-row: span 3;
-        - grid-template-rows: subgrid;
-      */
+     
       grid-template-rows: auto 1fr auto;
     }
   }
-
-  /* =========================================================
-     TYDELIG FALLBACK-BLOK: hvis subgrid IKKE understøttes
-     ========================================================= */
   @supports not (grid-template-rows: subgrid) {
     .employees-grid {
-      /* Beholder klassisk grid-opførsel */
       grid-auto-rows: auto;
     }
   }
@@ -188,7 +169,6 @@ import employees from "../data/employees.json";
 
     @supports (grid-template-rows: subgrid) {
       .employees-grid {
-        /* samme rækkelogik på mobil */
         grid-template-rows: auto 1fr auto;
       }
     }
