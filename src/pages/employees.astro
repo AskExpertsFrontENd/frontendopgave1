@@ -6,9 +6,30 @@ import employees from "../data/employees.json";
 
 <Layout title="Employees">
   <main class="employees-page">
+    <!-- HERO SECTION -->
+    <section class="hero-section">
+      <div class="banner">
+        <p class="grey-text1">TEAM</p>
+
+        <h1 class="hero-title">
+          <span>The Consultors</span>
+        </h1>
+
+        <p class="under-text">Our success stems from the synergy between dedicated teams and our valued clients. We prioritize a company culture that fosters exceptional productivity, ensures customer satisfaction.</p>
+      </div>
+    </section>
+
+    <!-- TEAM SECTION -->
     <section class="employees-section">
       <div class="container">
-        <h1>Our Team</h1>
+        <div class="section-top">
+          <div class="section-text">
+            <h2>Meet Our Great Team</h2>
+            <p>Welcome to our amazing team! We are a group of passionate individuals dedicated to excellence and innovation. Each member brings unique skills and experiences, working together to achieve our goals. Join us as we embark on exciting projects and create lasting impacts.</p>
+          </div>
+
+          <a href="#" class="join-btn">Join our team</a>
+        </div>
 
         <div class="employees-grid">
           {employees.map((employee) => <Card employee={employee} />)}
@@ -20,12 +41,23 @@ import employees from "../data/employees.json";
 
 <style>
   .employees-page {
-    background: #f3f3f3;
+    background: white;
     min-height: 100vh;
   }
 
+  .hero-section {
+    background: #f3f3f3;
+    border-top: 3px solid #020817;
+  }
+
+  /* Override global banner bg kun på employees-siden */
+  .hero-section .banner {
+    background: #f3f3f3;
+  }
+
   .employees-section {
-    padding: 4rem 1.5rem;
+    background: white;
+    padding: 90px 20px 100px;
   }
 
   .container {
@@ -33,18 +65,132 @@ import employees from "../data/employees.json";
     margin: 0 auto;
   }
 
-  h1 {
-    text-align: center;
-    font-size: 2.5rem;
-    font-weight: 700;
-    color: #111827;
-    margin: 0 0 3rem;
+  .section-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+    margin-bottom: 3.5rem;
+    flex-wrap: wrap;
   }
 
+  .section-text {
+    max-width: 650px;
+  }
+
+  .section-text h2 {
+    font-size: 3rem;
+    font-weight: 800;
+    color: #111827;
+    margin: 0 0 1rem;
+    line-height: 1.1;
+  }
+
+  .section-text p {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: #6b7280;
+    margin: 0;
+  }
+
+  .join-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #020817;
+    color: white;
+    text-decoration: none;
+    padding: 14px 28px;
+    border-radius: 999px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    transition: 0.2s ease;
+    white-space: nowrap;
+  }
+
+  .join-btn:hover {
+    transform: translateY(-2px);
+    opacity: 0.95;
+  }
+
+  /* =========================================================
+     FALLBACK (default): almindelig grid - virker overalt
+     ========================================================= */
   .employees-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 320px));
+    grid-template-columns: repeat(3, minmax(280px, 1fr));
+    gap: 3rem 2rem;
     justify-content: center;
-    gap: 2.5rem;
+
+    /* Gør parent klar til subgrid enhancement senere */
+    grid-auto-rows: auto;
+  }
+
+  /* =========================================================
+     ENHANCEMENT: subgrid hvis browseren understøtter det
+     (forbereder parent rows som Card.astro kan arve)
+     ========================================================= */
+  @supports (grid-template-rows: subgrid) {
+    .employees-grid {
+      /*
+        Definér fælles rækkestruktur til cards.
+        Tanken er, at Card.astro kan bruge:
+        - grid-row: span 3;
+        - grid-template-rows: subgrid;
+      */
+      grid-template-rows: auto 1fr auto;
+    }
+  }
+
+  /* =========================================================
+     TYDELIG FALLBACK-BLOK: hvis subgrid IKKE understøttes
+     ========================================================= */
+  @supports not (grid-template-rows: subgrid) {
+    .employees-grid {
+      /* Beholder klassisk grid-opførsel */
+      grid-auto-rows: auto;
+    }
+  }
+
+  @media (max-width: 1200px) {
+    .employees-grid {
+      grid-template-columns: repeat(2, minmax(280px, 1fr));
+    }
+
+    .section-text h2 {
+      font-size: 2.4rem;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .employees-section {
+      padding: 70px 20px 80px;
+    }
+
+    .section-top {
+      align-items: flex-start;
+      margin-bottom: 2.5rem;
+    }
+
+    .section-text h2 {
+      font-size: 2rem;
+    }
+
+    .section-text p {
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+
+    .employees-grid {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+
+    @supports (grid-template-rows: subgrid) {
+      .employees-grid {
+        /* samme rækkelogik på mobil */
+        grid-template-rows: auto 1fr auto;
+      }
+    }
   }
 </style>

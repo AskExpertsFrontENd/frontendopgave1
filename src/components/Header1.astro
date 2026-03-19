@@ -5,10 +5,10 @@
     </a>
 
     <div class="inner-menu">
-      <a class="inner-header" href="">Home</a>
+      <a class="inner-header" href="/">Home</a>
       <a class="inner-header" href="/case">Case Study</a>
       <a class="inner-header" href="/employees">Team</a>
-      <a class="inner-header" href="">About</a>
+      <a class="inner-header" href="/about">About</a>
     </div>
 
     <div class="login-wrapper">
@@ -40,6 +40,9 @@
   }
 
   header {
+    position: relative;
+    z-index: 9999;
+
     width: 100%;
     background: var(--color-neutrals-900);
     display: flex;
@@ -69,7 +72,7 @@
 
   .logo {
     color: white;
-    font-family: "Cabin", sans-serif;
+
     font-size: 30px;
     font-style: normal;
     font-weight: 600;
@@ -83,7 +86,7 @@
 
   .inner-header {
     color: white;
-    font-family: "Lato", sans-serif;
+
     font-size: 17.728px;
     font-style: normal;
     font-weight: 400;
@@ -113,8 +116,7 @@
     position: absolute;
     top: calc(100% + 12px);
     right: 0;
-    z-index: 1000;
-
+    z-index: 9999;
     border: none;
     margin: 0;
     padding: 32px;
@@ -132,7 +134,7 @@
   .login-title {
     margin: 0 0 32px 0;
     color: #111;
-    font-family: "Cabin", sans-serif;
+
     font-size: 30px;
     font-weight: 700;
     line-height: 1.1;
@@ -146,7 +148,7 @@
 
   .login-form label {
     color: #222;
-    font-family: "Lato", sans-serif;
+
     font-size: 16px;
     font-weight: 500;
   }
@@ -176,7 +178,7 @@
     border-radius: 999px;
     background: #f6c843;
     color: #111;
-    font-family: "Lato", sans-serif;
+
     font-size: 18px;
     font-weight: 700;
     cursor: pointer;

@@ -36,5 +36,8 @@
 /* ==== Spacing ==== */
 
 /* ==== Typography ==== */
-
+:root {
+  --font-family-heading: "Cabin", sans-serif;
+  --font-family-body: "Lato", sans-serif;
+}
 /* ==== Border Radii ==== */
