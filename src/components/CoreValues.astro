@@ -1,6 +1,5 @@
 ---
 import data from "@data/coreValues.json";
-
 import Layers from "@icons/layers.svg";
 import Bars from "@icons/bars.svg";
 import Globe from "@icons/globe.svg";
@@ -140,6 +139,19 @@ const iconMap = {
     .core-values--dark .core-values__button {
       background: var(--color-surface-primary);
       color: var(--color-ui-primary);
+      transition: background-color 180ms ease;
+    }
+    .core-values--dark .core-values__button:hover {
+      background: #e5e7eb;
+    }
+
+    @supports (color: oklch(from red l c h)) {
+      .core-values--dark .core-values__button:hover {
+        background: oklch(from var(--color-surface-primary) calc(l - 0.05) c h);
+      }
+      .core-values--dark .core-values__button:active {
+        background: oklch(from var(--color-surface-primary) calc(l - 0.1) c h);
+      }
     }
 
     .core-values--light .core-values__eyebrow,
@@ -151,6 +163,20 @@ const iconMap = {
     .core-values--light .core-values__button {
       background: var(--color-ui-primary);
       color: var(--color-on-ui-primary);
+      transition: background-color 180ms ease;
+    }
+    .core-values--light .core-values__button:hover {
+      background: #111827;
+    }
+
+    @supports (color: oklch(from red l c h)) {
+      .core-values--light .core-values__button:hover {
+        background: oklch(from var(--color-ui-primary) calc(l - 0.08) c h);
+      }
+
+      .core-values--light .core-values__button:active {
+        background: oklch(from var(--color-ui-primary) calc(l - 0.14) c h);
+      }
     }
 
     .core-values__grid {
@@ -226,12 +252,24 @@ const iconMap = {
       align-items: center;
       gap: 0.75rem;
       color: var(--color-text);
-      font-family: Lato, sans-serif;
-      font-size: 1rem;
-      font-weight: 600;
-      line-height: 1;
       text-decoration: none;
-      margin-top: auto;
+      transition: color 180ms ease;
+    }
+
+    .core-values__link:hover,
+    .core-values__link:focus-visible {
+      color: var(--color-action);
+    }
+
+    @supports (color: oklch(from red l c h)) {
+      .core-values__link:hover,
+      .core-values__link:focus-visible {
+        color: oklch(from var(--color-text) calc(l + 0.25) c h);
+      }
+
+      .core-values__link:active {
+        color: oklch(from var(--color-text) calc(l + 0.15) c h);
+      }
     }
 
     .core-values__link svg {

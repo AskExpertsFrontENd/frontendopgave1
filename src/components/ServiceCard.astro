@@ -80,4 +80,27 @@ import ArrowRight from "@icons/arrow--right.svg";
       flex-shrink: 0;
     }
   }
+  a {
+    display: inline-flex;
+    gap: 1ch;
+    color: var(--color-action);
+    font-weight: bold;
+    transition: color 180ms ease;
+  }
+
+  a:hover,
+  a:focus-visible {
+    color: var(--color-surface-highlight);
+  }
+
+  @supports (color: oklch(from red l c h)) {
+    a:hover,
+    a:focus-visible {
+      color: oklch(from var(--color-action) calc(l - 0.12) c h);
+    }
+
+    a:active {
+      color: oklch(from var(--color-action) calc(l - 0.2) c h);
+    }
+  }
 </style>
