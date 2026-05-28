@@ -22,7 +22,13 @@ const { employee } = Astro.props;
           <div class="left-column">
             <div class="image-stack">
               <div class="green-box"></div>
-              <img src={employee.img} alt={employee.name} class="employee-image" />
+              <img
+  src={employee.img
+    .replace("/src/data/images/", "/images/")
+    .replace("/src/data/img/", "/images/")}
+  alt={employee.name}
+  class="employee-image"
+/>
             </div>
 
             <div class="socials">
