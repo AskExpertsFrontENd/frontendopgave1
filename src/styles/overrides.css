@@ -1,1 +1,213 @@
-/* Override styles here */
+@layer components {
+  .site-layout {
+    min-height: 100svh;
+  }
+
+  .site-main {
+    display: grid;
+    grid-template-columns:
+      [full-start] minmax(var(--layout-gutter), 1fr)
+      [content-start] minmax(0, var(--layout-max-width))
+      [content-end] minmax(var(--layout-gutter), 1fr)
+      [full-end];
+  }
+
+  .site-main > * {
+    grid-column: full;
+  }
+
+  .macro-subgrid {
+    grid-column: full;
+    display: grid;
+    grid-template-columns: subgrid;
+  }
+
+  .macro-subgrid > * {
+    grid-column: content;
+  }
+
+  @supports not (grid-template-columns: subgrid) {
+    .macro-subgrid {
+      grid-template-columns:
+        minmax(var(--layout-gutter), 1fr)
+        minmax(0, var(--layout-max-width))
+        minmax(var(--layout-gutter), 1fr);
+    }
+
+    .macro-subgrid > * {
+      grid-column: 2;
+    }
+  }
+
+  .content-wrapper {
+    width: min(100% - 2rem, var(--layout-max-width));
+    margin-inline: auto;
+  }
+
+  .section-padding {
+    padding-block: var(--space-3xl);
+  }
+
+  .flow {
+    --flow-space: var(--space-s);
+  }
+
+  .flow > * + * {
+    margin-block-start: var(--flow-space);
+  }
+
+  .button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.625rem;
+    padding: 1rem 2.0625rem;
+    border-radius: 2.625rem;
+    border: 2px solid var(--color-button);
+    background: var(--color-button);
+    color: var(--color-white);
+    font-family: var(--font-family-body);
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1;
+    text-decoration: none;
+    cursor: pointer;
+    transition:
+      background-color var(--duration-normal) var(--ease-standard),
+      color var(--duration-normal) var(--ease-standard),
+      border-color var(--duration-normal) var(--ease-standard),
+      transform var(--duration-fast) var(--ease-standard);
+  }
+
+  .button:hover,
+  .button:focus-visible {
+    background: var(--color-white);
+    color: var(--color-button);
+    border-color: var(--color-button);
+  }
+
+  .button:active {
+    transform: translateY(1px);
+  }
+
+  @supports (color: oklch(from red l c h)) {
+    .button:hover,
+    .button:focus-visible {
+      background: oklch(from var(--color-button) calc(l + 0.92) c h);
+      color: var(--color-button);
+      border-color: var(--color-button);
+    }
+
+    .button:active {
+      background: oklch(from var(--color-button) calc(l + 0.85) c h);
+    }
+  }
+
+  .banner {
+    display: flex;
+    padding: 100px 360px;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+    background: var(--color-neutrals-50);
+  }
+
+  .banner.macro-subgrid {
+    display: grid;
+    grid-template-columns: subgrid;
+  }
+
+  .banner.macro-subgrid > * {
+    grid-column: content;
+    justify-self: center;
+  }
+
+  .banner p {
+    text-align: center;
+  }
+
+  .under-text {
+    max-width: 760px;
+    font-size: 22px;
+  }
+
+  .grey-text1 {
+    color: var(--color-neutrals-400);
+    text-align: center;
+    font-family: var(--font-family-body);
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 147.5%;
+    letter-spacing: 2.32px;
+    text-transform: uppercase;
+  }
+
+ .hero-title {
+  position: relative;
+  display: inline-block;
+  margin: 0;
+  line-height: 1.1;
+  z-index: 1;
+}
+
+.hero-title span {
+  position: relative;
+  display: inline-block;
+  font-family: var(--font-family-heading);
+  font-size: 60px;
+  font-weight: 700;
+  line-height: 1.1;
+  color: #000814;
+  text-decoration: none;
+  z-index: 1;
+}
+
+.hero-title span::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0.03em;
+  height: 7px;
+  background: var(--color-action);
+  z-index: -1;
+}
+
+.hero-title::before {
+  content: "";
+  position: absolute;
+  right: 100%;
+  width: 100vw;
+  height: 7px;
+  background: var(--color-action);
+  bottom: 0.03em;
+  z-index: -1;
+}
+  @media (max-width: 64rem) {
+    .banner {
+      padding-inline: 2rem;
+    }
+  }
+
+  @media (max-width: 48rem) {
+    .section-padding {
+      padding-block: var(--space-2xl);
+    }
+
+    .banner {
+      padding: 60px 20px;
+      gap: 24px;
+    }
+
+    .under-text {
+      font-size: 18px;
+      margin: 0;
+    }
+
+    .hero-title span {
+      font-size: 42px;
+    }
+    
+  }
+}

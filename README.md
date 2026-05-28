@@ -55,6 +55,9 @@ Som nævnt før fik @supports os til at indse vigtigheden i defensive css, hvilk
   }
 }
 
+Tilføjelser:
+Vi har brugt subgrid i hovedlayoutet ved at definere et makro-grid inde i Layout.astro. Det vil sige at Header, main og footer får grid-strukturen med grid-template-columns: subgrid, så alle sider der bruger layoutet, kan placere indhold i samme full og content kolonner. Derfor er subgrid ikke kun brugt i et komponent, men som en del af alle siders makro-layout.
+
 
 Konklusion:
 

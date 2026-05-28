@@ -1,186 +1,400 @@
-<header>
-  <nav>
+<header class="header">
+  <nav class="nav" aria-label="Primary navigation">
     <a href="/" class="logo">
-      Ask<span class="gul">Experts</span>
+      Ask<span>Experts</span>
     </a>
 
-    <div class="inner-menu">
-      <a class="inner-header" href="/">Home</a>
-      <a class="inner-header" href="/case">Case Study</a>
-      <a class="inner-header" href="/employees">Team</a>
-      <a class="inner-header" href="/about">About</a>
+    <input class="menu-toggle" type="checkbox" id="menu-toggle" />
+
+    <label class="hamburger" for="menu-toggle" aria-label="Open navigation">
+      <span></span>
+      <span></span>
+      <span></span>
+    </label>
+
+    <div class="menu">
+      <a href="/">Home</a>
+      <a href="/case">Case Study</a>
+      <a href="/employees">Team</a>
+      <a href="/about">About</a>
     </div>
 
     <div class="login-wrapper">
-      <button class="popover" type="button">Login</button>
+      <input class="login-toggle" type="checkbox" id="login-toggle" />
 
-      <div id="menu">
-        <h2 class="login-title">Dashboard Login</h2>
+      <label class="login-button" for="login-toggle">
+        Login
+      </label>
 
-        <form class="login-form">
+      <div id="login-menu" class="login-popover" popover>
+        <label class="login-close" for="login-toggle" aria-label="Close login">
+          ×
+        </label>
+
+        <h2>Dashboard Login</h2>
+
+        <form>
           <label for="email">Email address</label>
-          <input type="email" id="email" />
+          <input type="email" id="email" name="email" />
 
           <label for="password">Password</label>
-          <input type="password" id="password" />
+          <input type="password" id="password" name="password" />
 
-          <button type="submit" class="dashboard-btn">Go to dashboard</button>
+          <button type="submit">Go to dashboard</button>
         </form>
       </div>
     </div>
   </nav>
 </header>
 
+<script>
+  const loginToggle = document.querySelector("#login-toggle");
+
+  if (loginToggle instanceof HTMLInputElement) {
+    const updateScrollLock = () => {
+      document.documentElement.classList.toggle("no-scroll", loginToggle.checked);
+      document.body.classList.toggle("no-scroll", loginToggle.checked);
+    };
+
+    loginToggle.addEventListener("change", updateScrollLock);
+  }
+</script>
+
 <style>
-  @import url("https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,400..700;1,400..700&display=swap");
-  @import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap");
+  @layer components {
+    .header {
+      width: 100%;
+      background: var(--color-ui-primary, #030712);
+      padding: 2.375rem 1rem;
+      position: relative;
+      z-index: 50;
+      backdrop-filter: blur(10.5px);
+    }
 
-  :global(body) {
-    margin: 0;
-  }
+    .nav {
+      width: min(100%, 75rem);
+      margin-inline: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+    }
 
-  header {
-    position: relative;
-    z-index: 9999;
+    .logo {
+      color: white;
+      font-family: var(--font-family-heading, Cabin, sans-serif);
+      font-size: 1.875rem;
+      font-weight: 600;
+      line-height: 1.05;
+      text-decoration: none;
+      white-space: nowrap;
+    }
 
-    width: 100%;
-    background: var(--color-neutrals-900);
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    padding: 38px 0;
-    backdrop-filter: blur(10.5px);
-  }
+    .logo span {
+      color: var(--color-action, #ffcc4a);
+    }
 
-  nav {
-    width: min(1200px, calc(100% - 48px));
-    display: grid;
-    grid-template-columns: auto 1fr auto;
-    align-items: center;
-    column-gap: 48px;
-    row-gap: 0;
-    margin: 0 auto;
-  }
+    .menu {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1.875rem;
+    }
 
-  .inner-menu {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 30px;
-    flex-wrap: wrap;
-  }
+    .menu a {
+      color: white;
+      font-family: var(--font-family-body, Lato, sans-serif);
+      font-size: 1rem;
+      font-weight: 400;
+      line-height: 1.6;
+      text-decoration: none;
+      transition: color var(--duration-normal, 220ms) var(--ease-standard, ease);
+    }
 
-  .logo {
-    color: white;
+    .menu a:hover,
+    .menu a:focus-visible {
+      color: var(--color-action, #ffcc4a);
+    }
 
-    font-size: 30px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 105%;
-    text-decoration: none;
-  }
+    .menu-toggle {
+      position: absolute;
+      opacity: 0;
+      pointer-events: none;
+    }
 
-  .gul {
-    color: #ffd700;
-  }
+    .hamburger {
+      display: none;
+    }
 
-  .inner-header {
-    color: white;
+    .login-wrapper {
+      position: relative;
+      display: inline-flex;
+    }
 
-    font-size: 17.728px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 160%;
-    text-decoration: none;
-  }
+    .login-toggle {
+      position: absolute;
+      opacity: 0;
+      pointer-events: none;
+    }
 
-  .popover {
-    display: flex;
-    padding: 4px 16px;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    align-self: stretch;
-    border-radius: 999px;
-    background-color: white;
-    border: none;
-  }
+    .login-button {
+      min-width: 4.375rem;
+      min-height: 1.875rem;
+      padding: 0.25rem 1rem;
+      border-radius: 999px;
+      background: white;
+      color: #1c1c1c;
+      font-family: var(--font-family-body, Lato, sans-serif);
+      font-size: 0.875rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      anchor-name: --login-anchor;
+    }
 
-  .login-wrapper {
-    position: relative;
-    display: inline-block;
-  }
+    .login-button:hover,
+    .login-button:focus-visible {
+      background: var(--color-action, #ffcc4a);
+    }
 
-  #menu {
-    display: none;
-    position: absolute;
-    top: calc(100% + 12px);
-    right: 0;
-    z-index: 9999;
-    border: none;
-    margin: 0;
-    padding: 32px;
-    width: 390px;
-    max-width: calc(100vw - 32px);
-    border-radius: 20px;
-    background: #f4f4f4;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.18);
-  }
+    .login-popover {
+      display: none;
+      position: absolute;
+      top: 100%;
+      right: 0;
+      left: auto;
+      width: 23.125rem;
+      max-width: calc(100vw - 2rem);
+      padding: 2.1875rem 2rem 1.75rem;
+      border: 0;
+      border-radius: 1.25rem;
+      background: #f9fafb;
+      color: #030712;
+      box-shadow: 0 1.25rem 3.75rem rgba(0 0 0 / 0.16);
+      z-index: 99999;
+      margin: 0;
+      transform: none;
+    }
 
-  .login-wrapper:focus-within #menu {
-    display: block;
-  }
+    .login-toggle:checked ~ .login-popover {
+      display: block;
+    }
 
-  .login-title {
-    margin: 0 0 32px 0;
-    color: #111;
+    .login-close {
+      display: none !important;
+    }
 
-    font-size: 30px;
-    font-weight: 700;
-    line-height: 1.1;
-  }
+    @supports (top: anchor(bottom)) {
+      .login-popover {
+        position-anchor: --login-anchor;
+        top: anchor(bottom);
+        right: anchor(right);
+        left: auto;
+        margin-top: 0;
+      }
+    }
 
-  .login-form {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-  }
+    .login-popover h2 {
+      margin: 0 0 2rem;
+      color: #030712;
+      font-family: var(--font-family-heading, Cabin, sans-serif);
+      font-size: 2rem;
+      font-weight: 700;
+      line-height: 1.1;
+    }
 
-  .login-form label {
-    color: #222;
+    .login-popover form {
+      display: flex;
+      flex-direction: column;
+      gap: 0.875rem;
+    }
 
-    font-size: 16px;
-    font-weight: 500;
-  }
+    .login-popover label {
+      color: #030712;
+      font-family: var(--font-family-body, Lato, sans-serif);
+      font-size: 0.95rem;
+      font-weight: 400;
+      line-height: 1.4;
+    }
 
-  .login-form input {
-    width: 100%;
-    height: 56px;
-    border-radius: 999px;
-    border: 1.5px solid #cfcfcf;
-    background: #f4f4f4;
-    padding: 0 20px;
-    font-size: 16px;
-    outline: none;
-    box-sizing: border-box;
-    margin-bottom: 10px;
-  }
+    .login-popover input {
+      width: 100%;
+      height: 3.25rem;
+      padding-inline: 1.25rem;
+      border: 1px solid rgb(3 7 18 / 0.28);
+      border-radius: 999px;
+      background: transparent;
+      color: #030712;
+      outline: none;
+    }
 
-  .login-form input:focus {
-    border-color: #111;
-  }
+    .login-popover input:focus {
+      border-color: #030712;
+    }
 
-  .dashboard-btn {
-    margin-top: 12px;
-    width: 100%;
-    height: 58px;
-    border: none;
-    border-radius: 999px;
-    background: #f6c843;
-    color: #111;
+    .login-popover form button {
+      width: 100%;
+      min-height: 3.25rem;
+      margin-top: 0.875rem;
+      border: 0;
+      border-radius: 999px;
+      background: var(--color-action, #ffcc4a);
+      color: #030712;
+      font-family: var(--font-family-body, Lato, sans-serif);
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
 
-    font-size: 18px;
-    font-weight: 700;
-    cursor: pointer;
+    @supports (color: oklch(from red l c h)) {
+      .menu a:hover,
+      .menu a:focus-visible {
+        color: oklch(from var(--color-action, #ffcc4a) calc(l + 0.08) c h);
+      }
+
+      .login-popover form button:hover,
+      .login-popover form button:focus-visible {
+        background: oklch(from var(--color-action, #ffcc4a) calc(l - 0.06) c h);
+      }
+    }
+
+    @media (max-width: 48rem) {
+      :global(html.no-scroll),
+      :global(body.no-scroll) {
+        overflow: hidden;
+        height: 100%;
+      }
+
+      .header {
+        padding-block: 1.5rem;
+      }
+
+      .nav {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      .logo {
+        grid-column: 1;
+      }
+
+      .hamburger {
+        grid-column: 2;
+        justify-self: end;
+        display: inline-flex;
+        width: 2.75rem;
+        height: 2.75rem;
+        border-radius: 999px;
+        background: white;
+        cursor: pointer;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: 0.3125rem;
+      }
+
+      .hamburger span {
+        width: 1.25rem;
+        height: 0.125rem;
+        background: #030712;
+        border-radius: 999px;
+        display: block;
+        transition:
+          transform var(--duration-normal, 220ms) var(--ease-standard, ease),
+          opacity var(--duration-normal, 220ms) var(--ease-standard, ease);
+      }
+
+      .menu,
+      .login-wrapper {
+        display: none;
+      }
+
+      .menu-toggle:checked ~ .hamburger span:nth-child(1) {
+        transform: translateY(0.4375rem) rotate(45deg);
+      }
+
+      .menu-toggle:checked ~ .hamburger span:nth-child(2) {
+        opacity: 0;
+      }
+
+      .menu-toggle:checked ~ .hamburger span:nth-child(3) {
+        transform: translateY(-0.4375rem) rotate(-45deg);
+      }
+
+      .menu-toggle:checked ~ .menu {
+        grid-column: 1 / -1;
+        display: flex;
+        width: 100%;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+        padding-top: 1.25rem;
+      }
+
+      .menu-toggle:checked ~ .login-wrapper {
+        grid-column: 1 / -1;
+        display: flex;
+        width: 100%;
+        justify-content: flex-start;
+      }
+
+      .menu a {
+        font-size: 1.125rem;
+      }
+
+      .login-popover {
+        position: fixed;
+        inset: 0;
+        width: 100vw;
+        max-width: none;
+        height: 100dvh;
+        min-height: 100dvh;
+        overflow-y: auto;
+        padding: 5rem 1.5rem 2rem;
+        border-radius: 0;
+        transform: none;
+        z-index: 99999;
+      }
+
+      @supports (top: anchor(bottom)) {
+        .login-popover {
+          position: fixed;
+          inset: 0;
+          top: 0;
+          left: 0;
+          right: auto;
+          margin: 0;
+        }
+      }
+
+      .login-close {
+        position: absolute;
+  top: 1.25rem;
+  right: 1.25rem;
+  display: inline-flex !important;
+  width: 2.75rem;
+  height: 2.75rem;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #030712;
+  border-radius: 999px;
+  background: transparent;
+  color: #030712 !important;
+  font-size: 2rem !important;
+  line-height: 1;
+  cursor: pointer;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .menu a,
+      .login-button,
+      .hamburger span {
+        transition: none;
+      }
+    }
   }
 </style>

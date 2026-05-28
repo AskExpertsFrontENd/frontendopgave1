@@ -5,8 +5,7 @@ import employees from "../data/employees.json";
 ---
 
 <Layout title="Employees">
-  <main class="employees-page">
-    <!-- HERO SECTION -->
+  <div class="employees-page">
     <section class="hero-section">
       <div class="banner">
         <p class="grey-text1">TEAM</p>
@@ -15,20 +14,31 @@ import employees from "../data/employees.json";
           <span>The Consultors</span>
         </h1>
 
-        <p class="under-text">Our success stems from the synergy between dedicated teams and our valued clients. We prioritize a company culture that fosters exceptional productivity, ensures customer satisfaction.</p>
+        <p class="under-text">
+          Our success stems from the synergy between dedicated teams and our
+          valued clients. We prioritize a company culture that fosters
+          exceptional productivity, ensures customer satisfaction.
+        </p>
       </div>
     </section>
 
-    <!-- TEAM SECTION -->
     <section class="employees-section">
       <div class="container">
-        <div class="section-top">
-          <div class="section-text">
-            <h2>Meet Our Great Team</h2>
-            <p>Welcome to our amazing team! We are a group of passionate individuals dedicated to excellence and innovation. Each member brings unique skills and experiences, working together to achieve our goals. Join us as we embark on exciting projects and create lasting impacts.</p>
-          </div>
+        <div class="team-intro-wrapper">
+          <div class="section-top">
+            <div class="section-text">
+              <h2>Meet Our Great Team</h2>
+              <p>
+                Welcome to our amazing team! We are a group of passionate
+                individuals dedicated to excellence and innovation. Each member
+                brings unique skills and experiences, working together to achieve
+                our goals. Join us as we embark on exciting projects and create
+                lasting impacts.
+              </p>
+            </div>
 
-          <a href="#" class="join-btn">Join our team</a>
+            <a href="#" class="join-btn">Join our team</a>
+          </div>
         </div>
 
         <div class="employees-grid">
@@ -36,7 +46,7 @@ import employees from "../data/employees.json";
         </div>
       </div>
     </section>
-  </main>
+  </div>
 </Layout>
 
 <style>
@@ -50,7 +60,6 @@ import employees from "../data/employees.json";
     border-top: 3px solid #020817;
   }
 
-  /* Override global banner bg kun på employees-siden */
   .hero-section .banner {
     background: #f3f3f3;
   }
@@ -65,6 +74,11 @@ import employees from "../data/employees.json";
     margin: 0 auto;
   }
 
+  .team-intro-wrapper {
+    width: min(100%, var(--layout-max-width, 75rem));
+    margin-inline: auto;
+  }
+
   .section-top {
     display: flex;
     justify-content: space-between;
@@ -72,6 +86,7 @@ import employees from "../data/employees.json";
     gap: 2rem;
     margin-bottom: 3.5rem;
     flex-wrap: wrap;
+    width: 100%;
   }
 
   .section-text {
@@ -112,6 +127,7 @@ import employees from "../data/employees.json";
     transform: translateY(-2px);
     opacity: 0.95;
   }
+
   .employees-grid {
     display: grid;
     grid-template-columns: repeat(3, minmax(280px, 1fr));
@@ -125,6 +141,7 @@ import employees from "../data/employees.json";
       grid-template-rows: auto 1fr auto;
     }
   }
+
   @supports not (grid-template-rows: subgrid) {
     .employees-grid {
       grid-auto-rows: auto;
@@ -163,12 +180,6 @@ import employees from "../data/employees.json";
     .employees-grid {
       grid-template-columns: 1fr;
       gap: 2.5rem;
-    }
-
-    @supports (grid-template-rows: subgrid) {
-      .employees-grid {
-        grid-template-rows: auto 1fr auto;
-      }
     }
   }
 </style>

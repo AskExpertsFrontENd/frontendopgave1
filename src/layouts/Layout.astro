@@ -2,27 +2,37 @@
 import "@styles/main.css";
 import Header from "@components/Header1.astro";
 import Footer from "@components/Footer1.astro";
+
+const {
+  title = "AskExperts",
+  description = "Business consulting website built with Astro.",
+} = Astro.props;
 ---
 
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content={description} />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
-    <title>DIN TITEL HER. MÅSKE SOM PROP?</title>
+    <title>{title}</title>
+
     <style is:inline>
       @layer reset, global, tokens, components, overrides;
     </style>
   </head>
 
   <body>
-    <Header />
-    <main>
-      <slot />
-    </main>
-    <Footer />
+    <div class="site-layout">
+      <Header />
+
+      <main class="site-main">
+        <slot />
+      </main>
+
+      <Footer />
+    </div>
   </body>
 </html>
-
-<style></style>
